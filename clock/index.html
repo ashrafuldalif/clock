@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav id="bar">
+        <a href="#clockPage">
+        <div class="timeIcon btn active" id="clock">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" >
+    <circle cx="12" cy="12" r="8.5" stroke-width="2" class="icons" />
+    <path d="M16.5 12H12.25C12.1119 12 12 11.8881 12 11.75V8.5" stroke-width="2" stroke-linecap="round" class="icons"/>
+</svg>
+        </div></a>
+
+        <a href="#stopWatchPage">
+        <div class="stopWatchIcon btn" id="stopWatch" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M21 14C21 18.9706 16.9706 23 12 23C7.02944 23 3 18.9706 3 14C3 9.02944 7.02944 5 12 5C16.9706 5 21 9.02944 21 14ZM12 19C14.7614 19 17 16.7614 17 14C17 11.2386 14.7614 9 12 9C9.23858 9 7 11.2386 7 14C7 16.7614 9.23858 19 12 19ZM12 21C15.866 21 19 17.866 19 14C19 10.134 15.866 7 12 7C8.13401 7 5 10.134 5 14C5 17.866 8.13401 21 12 21ZM13 11C13 10.4477 12.5523 10 12 10C11.4477 10 11 10.4477 11 11V14C11 14.5523 11.4477 15 12 15C12.5523 15 13 14.5523 13 14V11Z" class="fillIconcolor"/>
+    <path d="M17.5 7.5L19 6" class="icons" stroke-width="2" stroke-linecap="round"/>
+    <path d="M10.0681 2.37059C10.1821 2.26427 10.4332 2.17033 10.7825 2.10332C11.1318 2.03632 11.5597 2 12 2C12.4403 2 12.8682 2.03632 13.2175 2.10332C13.5668 2.17033 13.8179 2.26427 13.9319 2.37059" class="icons" stroke-width="2" stroke-linecap="round"/>
+</svg>
+    </div></a>
+    <a href="#timerPage">
+        <div class="timerIcon btn" id="timer">
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none">
+    <path d="M12 12L18.1254 16.1694C18.6725 16.5418 19 17.1608 19 17.8227V20.5C19 20.7761 18.7761 21 18.5 21H5.5C5.22386 21 5 20.7761 5 20.5V17.8227C5 17.1608 5.32746 16.5418 5.87462 16.1694L12 12ZM12 12L18.1254 7.83062C18.6725 7.45819 19 6.83917 19 6.17729V3.5C19 3.22386 18.7761 3 18.5 3H5.5C5.22386 3 5 3.22386 5 3.5V6.17729C5 6.83917 5.32746 7.45819 5.87462 7.83062L12 12Z" class="icons" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 20.2071V20.85C15 20.9328 14.9328 21 14.85 21H9.15C9.06716 21 9 20.9328 9 20.85V20.2071C9 20.0745 9.05268 19.9473 9.14645 19.8536L11.4343 17.5657C11.7467 17.2533 12.2533 17.2533 12.5657 17.5657L14.8536 19.8536C14.9473 19.9473 15 20.0745 15 20.2071Z" class="fillIconcolor"/>
+    <path d="M12 11L17 8H7L12 11Z" class="fillIconcolor"/>
+    <path d="M12 18V12" class="icons" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+        </div></a>
+
+        <a href="#alarmPage">
+        <div class="alarmIcon btn" id="alarm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" style="color:white">
+    <circle cx="12" cy="12" r="7" class="icons" stroke-width="2"/>
+    <path d="M5.96472 3.1363C5.2865 3.31803 4.66807 3.67508 4.17157 4.17157C3.67508 4.66807 3.31803 5.2865 3.1363 5.96472"  class="icons" stroke-width="2" stroke-linecap="round"/>
+    <path d="M18.0353 3.1363C18.7135 3.31803 19.3319 3.67508 19.8284 4.17157C20.3249 4.66807 20.682 5.2865 20.8637 5.96472" class="icons" stroke-width="2" stroke-linecap="round"/>
+    <path d="M12 8V11.75C12 11.8881 12.1119 12 12.25 12H15" class="icons" stroke-width="2" stroke-linecap="round"/>
+</svg>
+</div></a>
+
+        <a href="#menuPage">
+        <div class="menuIcon btn" id="menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 25 25" class="fillIconcolor">
+            <circle cx="4" cy="12" r="2" class="icons" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="13" cy="12" r="2" class="icons" stroke-width="2" stroke-linecap="round" style="margin:20px"/>
+<circle cx="22" cy="12" r="2" class="icons" stroke-width="2" stroke-linecap="round"/>
+</svg>
+    </nav></a>
+
+
+
+
+<div id="container">
+
+    <!-- clock page________________________________ -->
+
+    <section id="clockPage">
+    <div class="page1">
+    <h1>Clock</h1>
+<div class="clock">
+    
+        <div class="timeBox" id="hour">00</div>
+        <div class="timeBox" id="min">00</div>
+        <div class="timeBox" id="sec">00</div>
+        <div class="timeBox" id="day">AM</div>
+    </div>
+        <div class="dateBox">
+            <div class="dBox" id="date">00/00/0000</div>
+        <div class="dBox" id="weekDay">SUNDAY</div>
+        </div>
+</div>
+</section>
+
+        <!-- stop watch page________________________________  -->
+<section id="stopWatchPage">
+    <div class="page2">
+        <h1>Stop Watch</h1>
+        
+<div class="stopwatch">
+    <div class="sWBox hide"  id="swhour">00</div>
+<div class="sWBox hide"  id="swmin">00</div>
+<div class="sWBox"  id="swsec">00</div>
+<div class="sWBox"  id="swMiliSec">00</div>
+</div>
+<div class="stopwatchbuttons">
+    <button class="stpwbtn" id="pauseBtn">Pause</button>
+    <button class="stpwbtn" id="startBtn">Start</button>
+    <button class="stpwbtn" id="stopBtn">Clear</button>
+</div>
+    </div>
+</section>
+
+<!-- timer page ________________________________  -->
+
+<section id="timerPage">
+    <div class="page3">
+<h1>Timer</h1>
+<div class="timer">
+<!-- <input type="numbers">
+<input type="numbers">
+<input type="numbers">
+<input type="numbers"> -->
+</div>
+    </div>
+</section>
+<section id="alarmPage"><h1>alarm</h1></section>
+<section id="menuPage"><h1>menu</h1></section>
+</div>
+    <footer>
+
+    </footer>
+    <script src="app.js"></script>
+</body>
+</html>

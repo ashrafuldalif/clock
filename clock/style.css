@@ -1,0 +1,157 @@
+:root{
+    --iconcolor: rgb(255, 255, 255);
+    --iconOutLine:rgb(255, 255, 255);
+    --highlight:yellowgreen;
+    --barcolor:rgb(0, 0, 0);
+    --clickEffect: rgb(140, 255, 105);
+    --underTheBar:rgba(114, 255, 71, 0.594);
+    --topOfTheBar:rgb(0, 0, 0);
+    --headercolor:white;
+    --textcolor:white;
+    --bgcolor1:#048404;
+    --bgcolor2:#000000;
+    --clockoutline:rgba(255, 255, 255, 0.681);
+    --btnBackColor:black;
+    --btnTextColor:white;
+    --buttonOutLine:white;
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.icons{
+    stroke:var(--iconcolor);
+}
+.fillIconcolor{
+    fill: var(--iconcolor);
+
+}
+
+nav{
+    height: 14vh;
+    width: 100vw;
+    background-color:var(--barcolor);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 0px;   
+   /* this is for switching the nav bar to the bottom  */
+    box-shadow:  1px 0 40px 5px var(--topOfTheBar);
+}
+
+.menuIcon,.timeIcon,.stopWatchIcon,.timerIcon,.alarmIcon{
+    height: 9vh;
+    width: 9vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20%;
+    margin: 0 1vw 0 1vw ;
+    flex-shrink: 0;
+    border-bottom: 5px solid var(--highlight);
+    box-shadow: 0 0 2px 0.1px var(--iconOutLine);
+    transition:all 1.5s ease-in-out 0 ;
+}
+.menuIcon:active,.timeIcon:active,.stopWatchIcon:active,.timerIcon:active,.alarmIcon:active,.stpwbtn:active{
+border:none;
+    transform: translate(5px,0),scale(40);
+    box-shadow: 0 0 1.2vw .1vw var(--clickEffect);
+}
+.active{
+    border:none;
+    transform: translate(5px,0),scale(40);
+    box-shadow: 0 0 1.2vw .1vw var(--clickEffect);
+}
+.page1,.page2,.page3,.page4,.page5{
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    margin-top: 2%;
+    font-size: 5rem;
+    font-weight: 100;
+    color: var(--headercolor);
+    text-shadow: 1px 0px 11px  var(--highlight);
+    border-radius: 20px;
+    padding:0 15px 10px 15px;
+    border-bottom:3px solid var(--highlight);
+}
+.clock,.stopwatch{
+    display: flex;
+    margin-top: 10vh;
+}
+.timeBox,.sWBox{
+    height: 75%;
+    margin: 20px;
+    font-size: 5rem;
+    padding: 20px;
+    color: var(--textcolor);
+    background-color: rgb(0, 0, 0);
+    border-bottom: 8px solid var(--highlight);
+    border-radius: 20%;
+    box-shadow: 0 0 10px 1px  var(--clockoutline);
+}
+
+.hide{
+    position: absolute;
+    z-index: -2;
+    visibility: hidden;
+}
+.dateBox{
+    margin: 20px;
+    width:50%;
+    height: 8vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 8px solid var(--highlight);
+    border-radius: 100px;
+    background-color: black;
+    box-shadow:0 0 10px 1px var(--iconOutLine);
+}
+.dBox{
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 0 ;
+}
+
+#container{
+    scroll-snap-type:x mandatory; 
+    overflow-x: scroll;
+    height: 100vh;
+    width: 100vw;
+    display:flex;
+}
+section{
+    flex: none;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    color: white;
+    justify-content: center;
+    scroll-snap-align: start;
+    background: linear-gradient(to top, var(--bgcolor1), var(--bgcolor2)); 
+}
+.stpwbtn{
+    height: 60px;
+    width: 100px;
+    margin: 20px;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background-color:var(--btnBackColor) ;
+    color: var(--btnTextColor);
+    border: 0.01px solid var(--buttonOutLine);
+    box-shadow:0 0 8px 0.1px var(--buttonOutLine) ;
+    border-bottom:5px solid var(--highlight);
+}
