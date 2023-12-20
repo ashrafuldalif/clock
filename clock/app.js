@@ -14,21 +14,26 @@ let sections = document.querySelectorAll("section");
 // stopwatch______________
 
 // page styling_____________________
-// window.onscroll = () => {
-//   sections.forEach((sec) => {
-//     let left = window.scrollX;
-//     let offset = sec.offsetLeft;
-//     let width = sec.offsetWidth;
-//     let id = sec.getAttribute("id");
-//     console.log(id);
-//     if (left >= offset && left < offset + width) {
-//       links.forEach((Link) => {
-//         Link.classList.remove("active");
-//         document.querySelector("#" + id).classList.add("acive");
-//       });
-//     }
-//   });
-// };
+
+              // this is the somossaer jayga brother 
+              // ki korle selected icon gula glow korbo and onno gula normal hoia jaibo ? 
+              //bujataci na..
+
+window.onscroll = () => {
+  sections.forEach((sec) => {
+    let left = window.scrollX;
+    let offset = sec.offsetLeft;
+    let width = sec.offsetWidth;
+    let id = sec.getAttribute("id");
+    console.log(id);
+    if (left >= offset && left < offset + width) {
+      links.forEach((Link) => {
+        Link.classList.remove("active");
+        document.querySelector("#" + id).classList.add("acive");
+      });
+    }
+  });
+};
 
 // clock _________________________________________
 
