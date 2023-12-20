@@ -39,21 +39,24 @@ let sections = document.querySelectorAll("section");
               // ki korle selected icon gula glow korbo and onno gula normal hoia jaibo ? 
               //bujataci na..
 
-window.onscroll = () => {
-  sections.forEach((sec) => {
-    let left = window.scrollX;
-    let offset = sec.offsetLeft;
-    let width = sec.offsetWidth;
-    let id = sec.getAttribute("id");
-    console.log(id);
-    if (left >= offset && left < offset + width) {
-      links.forEach((Link) => {
-        Link.classList.remove("active");
-        document.querySelector("#" + id).classList.add("acive");
-      });
-    }
-  });
-};
+
+
+          // Whiteant:     Edike Jhamela Ase  r oi somossa ami thik kore disi upre dekh amr code ase js 
+// window.onscroll = () => {
+//   sections.forEach((sec) => {
+//     let left = window.scrollX;
+//     let offset = sec.offsetLeft;
+//     let width = sec.offsetWidth;
+//     let id = sec.getAttribute("id");
+//     console.log(id);
+//     if (left >= offset && left < offset + width) {
+//       links.forEach((Link) => {
+//         Link.classList.remove("active");
+//         document.querySelector("#" + id).classList.add("acive");
+//       });
+//     }
+//   });
+// };
 
 // clock _________________________________________
 
@@ -133,12 +136,17 @@ stopBtn.addEventListener("click",()=>{
   SWhour.innerHTML="00";
 
 })
+
+
 startBtn.addEventListener("click",()=>{
   if(!start || p==true ){
     p=false;
     start=  setInterval(engineOfStopWatch , 10);
   }
 } );
+
+
+
 const engineOfStopWatch=()=>{
 SWmilisec.innerHTML = sMilisec < 10 ? "0" + sMilisec : sMilisec;
 sMilisec++;
