@@ -1,3 +1,23 @@
+
+// WhiteanT Part 
+// TODO: ekta function banaya dei ja page ta load kore dibo ar active add kore dibo
+// Add active class to the current button (highlight it)
+
+var btns = document.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function () {
+      var current = document.getElementsByClassName("active");
+      if (current.length > 0) {
+        current[0].className = current[0].className.replace(" active", "");
+      }
+      this.className += " active";
+    });
+}
+
+//
+
+
+
 // clock____________________
 
 let alltime = document.querySelector(".clock");
