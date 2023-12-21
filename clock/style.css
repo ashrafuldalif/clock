@@ -1,26 +1,32 @@
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
 :root{
     --iconcolor: rgb(255, 255, 255);
     --iconOutLine:rgb(255, 255, 255);
     --highlight:yellowgreen;
     --barcolor:rgb(0, 0, 0);
+    --iconBackground:transparent;
     --clickEffect: rgb(140, 255, 105);
     --underTheBar:rgba(114, 255, 71, 0.594);
     --topOfTheBar:rgb(0, 0, 0);
-    --headercolor:white;
-    --textcolor:white;
+    --headercolor:rgb(255, 255, 255);
+    --headerOutline:rgb(0, 0, 0);
+    --textcolor:rgb(255, 255, 255);
     --bgcolor1:#048404;
     --bgcolor2:#000000;
-    --clockoutline:rgba(255, 255, 255, 0.681);
+    --clockoutline:rgba(255, 255, 255, 0.478);
     --btnBackColor:black;
     --btnTextColor:white;
     --buttonOutLine:white;
-
+    --clockBackColor:rgba(0, 0, 0, 0.819);
+    --dateOutline:rgba(255, 255, 255, 0.51);
+    --fontStyle1: 'Quicksand', sans-serif;
 }
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family:var(--fontStyle1) ;
 }
 .icons{
     stroke:var(--iconcolor);
@@ -37,10 +43,10 @@ nav{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    box-shadow:  1px 0 40px 5px var(--topOfTheBar);
+    /* this is for switching the nav bar to the bottom  */
     position: fixed;
     bottom: 0px;   
-   /* this is for switching the nav bar to the bottom  */
-    box-shadow:  1px 0 40px 5px var(--topOfTheBar);
 }
 
 .menuIcon,.timeIcon,.stopWatchIcon,.timerIcon,.alarmIcon{
@@ -53,6 +59,7 @@ nav{
     border-radius: 20%;
     margin: 0 1vw 0 1vw ;
     flex-shrink: 0;
+    background-color: var(--iconBackground);
     border-bottom: 5px solid var(--highlight);
     box-shadow: 0 0 2px 0.1px var(--iconOutLine);
     transition:all 1.5s ease-in-out 0 ;
@@ -79,7 +86,7 @@ h1{
     font-size: 5rem;
     font-weight: 100;
     color: var(--headercolor);
-    text-shadow: 1px 0px 11px  var(--highlight);
+    text-shadow: 1px 0px 11px  var(--headerOutline);
     border-radius: 20px;
     padding:0 15px 10px 15px;
     border-bottom:3px solid var(--highlight);
@@ -94,7 +101,7 @@ h1{
     font-size: 5rem;
     padding: 20px;
     color: var(--textcolor);
-    background-color: rgb(0, 0, 0);
+    background-color:var(--clockBackColor) ;
     border-bottom: 8px solid var(--highlight);
     border-radius: 20%;
     box-shadow: 0 0 10px 1px  var(--clockoutline);
@@ -107,16 +114,17 @@ h1{
 }
 .dateBox{
     margin: 20px;
-    width:50%;
-    height: 8vh;
-    color: white;
+    width:450px;
+    height: 60px;
+
+    color: var(--textcolor);
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     border-bottom: 8px solid var(--highlight);
     border-radius: 100px;
-    background-color: black;
-    box-shadow:0 0 10px 1px var(--iconOutLine);
+    background-color: var(--clockBackColor);
+    box-shadow:0 0 10px 1px var(--dateOutline);
 }
 .dBox{
     font-size: 2rem;
@@ -136,7 +144,7 @@ section{
     height: 100vh;
     width: 100vw;
     display: flex;
-    color: white;
+    color: var(--textcolor);
     justify-content: center;
     scroll-snap-align: start;
     background: linear-gradient(to top, var(--bgcolor1), var(--bgcolor2)); 
@@ -155,3 +163,30 @@ section{
     box-shadow:0 0 8px 0.1px var(--buttonOutLine) ;
     border-bottom:5px solid var(--highlight);
 }
+.timer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 100px 0 50px 0;
+}
+.timerBox{
+    height: 140px;
+    width: 130px;
+    padding: 30px;
+    text-align: center;
+    outline: none;
+    color: var(--textcolor);
+    background-color: var(--clockBackColor);
+    font-weight: 400;
+    font-size: 2.5rem;
+    margin: 0 25px ;
+    border: none;
+    box-shadow: 0 0 10px 1px var(--clockoutline);
+    border-radius: 20px;
+}
+.timerBtns{
+    display: flex;
+align-items: center;
+justify-content: center;
+}
+

@@ -106,12 +106,19 @@
 <section id="timerPage">
     <div class="page3">
 <h1>Timer</h1>
+<form id="timerInputs">
 <div class="timer">
-<!-- <input type="numbers">
-<input type="numbers">
-<input type="numbers">
-<input type="numbers"> -->
+<input type="numbers" class="timerBox" placeholder="_ _" min="1" max="2" id="TMRhour">
+<input type="numbers" class="timerBox" placeholder="_ _"  max="2" id="TMRmin">
+<input type="numbers" class="timerBox" placeholder="_ _"  max="2" id="TMRsec">
 </div>
+<div class="timerBtns" id="timerBtns">
+
+    <button class="timerResetBtn" id="timerReset">reset</button>
+<button type="submit"> start</button>
+
+</div>
+</form>
     </div>
 </section>
 <section id="alarmPage"><h1>alarm</h1></section>

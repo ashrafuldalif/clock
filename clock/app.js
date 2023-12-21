@@ -31,32 +31,6 @@ let tarikh = allday.querySelector("#date");
 let links = document.querySelectorAll("nav a");
 let sections = document.querySelectorAll("section");
 
-// stopwatch______________
-
-// page styling_____________________
-
-              // this is the somossaer jayga brother 
-              // ki korle selected icon gula glow korbo and onno gula normal hoia jaibo ? 
-              //bujataci na..
-
-
-
-          // Whiteant:     Edike Jhamela Ase  r oi somossa ami thik kore disi upre dekh amr code ase js 
-// window.onscroll = () => {
-//   sections.forEach((sec) => {
-//     let left = window.scrollX;
-//     let offset = sec.offsetLeft;
-//     let width = sec.offsetWidth;
-//     let id = sec.getAttribute("id");
-//     console.log(id);
-//     if (left >= offset && left < offset + width) {
-//       links.forEach((Link) => {
-//         Link.classList.remove("active");
-//         document.querySelector("#" + id).classList.add("acive");
-//       });
-//     }
-//   });
-// };
 
 // clock _________________________________________
 
@@ -81,8 +55,8 @@ const whatIsTheTimeNow = () => {
   let month = today.getMonth() + 1;
   let date = today.getDate();
   let year = today.getFullYear();
-  DATE = month < 10 ? "0" + month : month + "/" + year;
-  DATE = date < 10 ? "0" + date : date + "/" + DATE;
+  DATE = month < 10 ? "0" + month : month + " : " + year;
+  DATE = date < 10 ? "0" + date : date + " : " + DATE;
   hour.innerHTML = h < 10 ? "0" + h : h;
   min.innerHTML = m < 10 ? "0" + m : m;
   sec.innerHTML = s < 10 ? "0" + s : s;
