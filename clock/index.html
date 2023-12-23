@@ -108,15 +108,61 @@
 <h1>Timer</h1>
 <form id="timerInputs">
 <div class="timer">
-<input type="numbers" class="timerBox" placeholder="_ _" min="1" max="2" id="TMRhour">
-<input type="numbers" class="timerBox" placeholder="_ _"  max="2" id="TMRmin">
-<input type="numbers" class="timerBox" placeholder="_ _"  max="2" id="TMRsec">
+
+<div class="timerArrowRapper">
+    <div class="up"> 
+    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 25" fill="none">
+    <path d="M18 15.625L12 9.375L6 15.625" class="arrow" />
+</svg></div>
+
+    <input type="number" class="timerBox"    min="0"  max="100" id="TMRhour" value="00" >
+
+    <div class="down">        
+    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none">
+    <path d="M18 9L12 15L6 9" class="arrow" /></svg>
+    </div>
 </div>
+
+<div class="timerArrowRapper">
+<div class="up">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 25" fill="none">
+    <path d="M18 15.625L12 9.375L6 15.625" class="arrow"/>
+</svg>
+</div>
+
+<input type="number" class="timerBox"   min="0" max="59" id="TMRmin" value="00">
+
+<div class="down">
+    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none">
+    <path d="M18 9L12 15L6 9" class="arrow" />
+</svg>
+</div>
+</div>
+
+
+<div class="timerArrowRapper">
+    <div class="up">
+    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 25" fill="none">
+    <path d="M18 15.625L12 9.375L6 15.625" class="arrow" />
+</svg></div>
+
+<input type="number" class="timerBox"   min="0" max="59" id="TMRsec" value="00">
+
+<div class="down">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none">
+    <path d="M18 9L12 15L6 9" class="arrow"/>
+</svg></div>
+
+</div>
+
+</div>
+<div class="timerDisplay hide"> 00 : 00 : 00 </div>
 <div class="timerBtns" id="timerBtns">
-
-    <button class="timerResetBtn" id="timerReset">reset</button>
-<button type="submit"> start</button>
-
+    <button class="timerBtn" onclick="endTimer()" id="timerReset">reset</button>
+    <button class="timerBtn" onclick="startTimer()" id="submitBtn"> start</button>
+    <button class="timerBtn" onclick="pauseTimer()" id="pauseBtn"> pause</button>
+    <button class="stopRinging " onclick=""> Stop Ringing</button>
+    
 </div>
 </form>
     </div>

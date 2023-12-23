@@ -1,24 +1,27 @@
     @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
 :root{
-    --iconcolor: rgb(255, 255, 255);
-    --iconOutLine:rgb(255, 255, 255);
-    --highlight:yellowgreen;
-    --barcolor:rgb(0, 0, 0);
-    --iconBackground:transparent;
-    --clickEffect: rgb(140, 255, 105);
-    --underTheBar:rgba(114, 255, 71, 0.594);
+    --iconcolor: #000000;
+    --iconBackground:rgba(255, 255, 255, 0.907);
+    --iconOutLine:#ffffff;
+    --highlight:#2fa8ff;
+    --barcolor:#3559E0;
+    --clickEffect: #000000;
+    --underTheBar:#3c92cf;
     --topOfTheBar:rgb(0, 0, 0);
     --headercolor:rgb(255, 255, 255);
     --headerOutline:rgb(0, 0, 0);
-    --textcolor:rgb(255, 255, 255);
-    --bgcolor1:#048404;
-    --bgcolor2:#000000;
+    --textcolor:rgb(0, 0, 0);
+    --bgcolor1:#ffffff;
+    --bgcolor2:#0059ff;
     --clockoutline:rgba(255, 255, 255, 0.478);
-    --btnBackColor:black;
-    --btnTextColor:white;
+    --btnBackColor:rgba(255, 255, 255, 0.539);
+    --btnTextColor:rgb(0, 0, 0);
     --buttonOutLine:white;
-    --clockBackColor:rgba(0, 0, 0, 0.819);
+    --buttonBorder:#2fa8ff;
+    --clockBackColor:rgb(255, 255, 255);
     --dateOutline:rgba(255, 255, 255, 0.51);
+    --arrowColor:rgb(0, 0, 0);
+    --timerBtnBg:white;
     --fontStyle1: 'Quicksand', sans-serif;
 }
 
@@ -64,7 +67,7 @@ nav{
     box-shadow: 0 0 2px 0.1px var(--iconOutLine);
     transition:all 1.5s ease-in-out 0 ;
 }
-.menuIcon:active,.timeIcon:active,.stopWatchIcon:active,.timerIcon:active,.alarmIcon:active,.stpwbtn:active{
+.menuIcon:active,.timeIcon:active,.stopWatchIcon:active,.timerIcon:active,.alarmIcon:active,.stpwbtn:active,.timerBtn:active,.up:active,.down:active{
 border:none;
     transform: translate(5px,0),scale(40);
     box-shadow: 0 0 1.2vw .1vw var(--clickEffect);
@@ -97,9 +100,13 @@ h1{
 }
 .timeBox,.sWBox{
     height: 75%;
+    width: 130px;
     margin: 20px;
     font-size: 5rem;
     padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--textcolor);
     background-color:var(--clockBackColor) ;
     border-bottom: 8px solid var(--highlight);
@@ -149,7 +156,7 @@ section{
     scroll-snap-align: start;
     background: linear-gradient(to top, var(--bgcolor1), var(--bgcolor2)); 
 }
-.stpwbtn{
+.stpwbtn,.timerBtn{
     height: 60px;
     width: 100px;
     margin: 20px;
@@ -159,7 +166,7 @@ section{
     font-weight: 600;
     background-color:var(--btnBackColor) ;
     color: var(--btnTextColor);
-    border: 0.01px solid var(--buttonOutLine);
+    border: 2px solid var(--buttonBorder);
     box-shadow:0 0 8px 0.1px var(--buttonOutLine) ;
     border-bottom:5px solid var(--highlight);
 }
@@ -167,26 +174,73 @@ section{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 100px 0 50px 0;
+    margin: 150px 0 50px 0;
 }
 .timerBox{
-    height: 140px;
-    width: 130px;
+    height: 120px;
+    width: 150px;
     padding: 30px;
     text-align: center;
     outline: none;
     color: var(--textcolor);
     background-color: var(--clockBackColor);
-    font-weight: 400;
-    font-size: 2.5rem;
+    font-size: 4.1rem;
     margin: 0 25px ;
+    font-weight: 800;
     border: none;
-    box-shadow: 0 0 10px 1px var(--clockoutline);
-    border-radius: 20px;
+    z-index: 1;
+    box-shadow: 0 0 10px 2px var(--clockoutline);
+    /* border-radius: 20px; */
+    /* border-bottom: 8px solid var(--highlight); */
+}
+.timerBox::-webkit-inner-spin-button,
+.timerBox::-webkit-outer-spin-button{
+    -webkit-appearance: none;
 }
 .timerBtns{
     display: flex;
-align-items: center;
-justify-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.arrow{
+    stroke:var(--arrowColor);
 }
 
+
+.timerArrowRapper{
+    height: 210px;
+    display:flex;
+    flex-direction:column ;
+    justify-content: flex-end;
+    align-items: center;
+}
+.up,.down{
+    background-color: var(--timerBtnBg);
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px 2px var(--clockoutline);
+}
+.up{
+    border-top-right-radius:25px ;
+    border-top-left-radius:25px ;
+}
+.down{
+    border-bottom-right-radius:25px ;
+    border-bottom-left-radius:25px ;
+    border-bottom: 8px solid var(--highlight);
+}
+.timerDisplay{
+    height: 150px;
+    width: 500px;
+    background-color: var(--clockBackColor) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 120px 0 50px 0;
+    border-radius: 30px;
+    font-size: 5rem;
+    border-bottom:10px solid var(--highlight);
+    box-shadow: 0 0 10px 2px var(--clockoutline);
+}
