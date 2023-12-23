@@ -244,3 +244,13 @@ section{
     border-bottom:10px solid var(--highlight);
     box-shadow: 0 0 10px 2px var(--clockoutline);
 }
+.stopRinging{
+    height: 110px;
+    width: 280px;
+    border: none ;
+    border-radius: 25px;
+    font-size: 2.5rem;
+    padding: 15px;
+    font-weight: 900;
+    border-bottom: 8px solid var(--highlight);
+}

@@ -151,8 +151,10 @@ const tInputsec = timerThings.querySelector("#TMRsec");
 const resetTimer= timerThings.querySelector("#timerReset");
 const submitBtn= timerThings.querySelector("#submitBtn");
 const timerDisplay = timerThings.querySelector(".timerDisplay");
+const timerBtns=timerThings.querySelectorAll(".timerBtn");
 const timerBox=timerThings.getElementsByClassName('timerBox');
 const timerArrowRapper = document.querySelectorAll(".timerArrowRapper");
+const stopRinging = document.querySelector(".stopRinging");
 
 let check=true;
 let remainingTimeInSec,remainings;
@@ -193,6 +195,7 @@ timerDisplay.innerHTML = `${String(hours).padStart(2, "0")} : ${String(minutes).
   if (totalTimeInSec <= 0) {
     clearInterval(countdown);
     timerDisplay.innerHTML = "Time's up!";
+
   timesUp();
   }
 remainings=totalTimeInSec-1;
@@ -213,7 +216,25 @@ function pauseTimer(){
 remainingTimeInSec=remainings;
   check=true;
 }
+let playTheAudio;
+let timerRing=new Audio("timer_tune.mp3");
 function timesUp(){
-  timerBox.classList.add("hide");
-  
+  for(let i=0 ;i<3;i++){
+    timerBtns[i].classList.add("hide");
+  }
+  stopRinging.classList.remove("hide");
+  playTheAudio=setInterval(() => {
+    timerRing.play();
+  }, 1000);
+
 }
+stopRinging.addEventListener("click",e=>{
+  for(let i=0 ;i<3;i++){
+    timerBtns[i].classList.remove("hide");
+  }
+  stopRinging.classList.add("hide");
+timerRing.pause();
+  clearInterval(playTheAudio);
+  timerRing.currentTime=0;
+  endTimer();
+})
