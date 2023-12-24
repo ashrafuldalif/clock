@@ -225,7 +225,7 @@ function timesUp(){
   stopRinging.classList.remove("hide");
   playTheAudio=setInterval(() => {
     timerRing.play();
-  }, 1000);
+  }, 10);
 
 }
 stopRinging.addEventListener("click",e=>{

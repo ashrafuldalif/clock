@@ -254,3 +254,6 @@ section{
     font-weight: 900;
     border-bottom: 8px solid var(--highlight);
 }
+#TMRhour{
+    padding: 30px 10px;
+}
