@@ -177,7 +177,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 25" fill="none">
     <path d="M18 15.625L12 9.375L6 15.625" class="arrow" />
 </svg></div>
-<input type="number" class="alarmInputBox" id="alarmHour" min="0" max="12"  placeholder="12">
+<input type="number" class="alarmInputBox" id="alarmHour" min="0" max="12"  value="12">
     <div class="down">        
     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none">
     <path d="M18 9L12 15L6 9" class="arrow" /></svg>
@@ -189,7 +189,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 25" fill="none">
     <path d="M18 15.625L12 9.375L6 15.625" class="arrow" />
     </svg></div>
-<input type="number" class="alarmInputBox" id="alarmMin" min="0" max="49"  placeholder="12">
+<input type="number" class="alarmInputBox" id="alarmMin" min="0" max="49"  value="12">
     <div class="down">        
     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none">
     <path d="M18 9L12 15L6 9" class="arrow" /></svg>
@@ -201,20 +201,27 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 25" fill="none">
     <path d="M18 15.625L12 9.375L6 15.625" class="arrow" />
 </svg></div>
-<input type="number" class="alarmInputBox" id="alarmSec" min="0" max="49" placeholder="12">
+<input type="number" class="alarmInputBox" id="alarmSec" min="0" max="49" value="12">
     <div class="down">        
     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none">
     <path d="M18 9L12 15L6 9" class="arrow" /></svg>
     </div>
     </div>
 
-<div class="alarmArrowRapper">
-        <div class="up"> 
+<div class="alarmArrowRapper" >
+        <div class="up" onclick="changeAmPm(1)"> 
     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 25" fill="none">
     <path d="M18 15.625L12 9.375L6 15.625" class="arrow" />
 </svg></div>
-<input type="number" class="alarmInputBox" id="alarmAmPm" min="0" max="2"  placeholder="AM">
-<div class="down">        
+
+<!-- vai ei jaygay somossa  -->
+
+<!-- <input type="number" class="alarmInputBox" id="alarmAmPm" min="0" max="2"  value="AM"> -->
+<select name="ampm" class="alarmInputBox " id="alarmAmPm">
+        <option value=0 class="hide" >AM</option>
+    <option value=1 class="hide">PM</option>
+</select>
+<div class="down" onclick="changeAmPm(-1)">        
     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none">
     <path d="M18 9L12 15L6 9" class="arrow" /></svg>
     </div>
@@ -222,6 +229,9 @@
 </div>
 <div class="alarmBtns">
     <button class="alarmSetBtn">Set</button>
+</div>
+<div class="allAlarms">
+
 </div>
 </div>
 </section>

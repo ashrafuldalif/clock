@@ -116,7 +116,7 @@ h1{
 
 .hide{
     position: absolute;
-    z-index: -2;
+    z-index: -20;
     visibility: hidden;
 }
 .dateBox{
@@ -258,4 +258,40 @@ section{
 }
 #TMRhour{
     padding: 30px 10px;
+}
+.alarmInputs{
+    margin-top: 100px;
+    margin-bottom: 0;
+}
+.alarmInputBox{
+    margin: 0;
+}
+.alarmArrowRapper{
+    transform: scale(0.7);
+}
+#alarmAmPm{
+    font-size: 3rem;
+}
+#alarmAmPm {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    border: 0;
+    width: 100%; 
+    outline: none;
+    box-shadow: none;
+    border-radius: 0;
+    
+}
+
+#alarmAmPm::-ms-expand {
+    display: none;
+}
+
+#alarmAmPm option{
+    display: none;
+    z-index: -20;
+    
 }

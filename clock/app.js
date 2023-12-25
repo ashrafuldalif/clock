@@ -51,11 +51,14 @@ const whatIsTheTimeNow = () => {
   let month = today.getMonth() + 1;
   let date = today.getDate();
   let year = today.getFullYear();
-  DATE = month < 10 ? "0" + month : month + " : " + year;
-  DATE = date < 10 ? "0" + date : date + " : " + DATE;
-  hour.innerHTML = h < 10 ? "0" + h : h;
-  min.innerHTML = m < 10 ? "0" + m : m;
-  sec.innerHTML = s < 10 ? "0" + s : s;
+  DATE = addZero(month) + " : " + year;
+  DATE = addZero(date) + " : " + DATE;
+  // hour.innerHTML = h < 10 ? "0" + h : h;
+  hour.innerHTML = addZero(h);
+  // min.innerHTML = m < 10 ? "0" + m : m;
+  min.innerHTML = addZero(m);
+  // sec.innerHTML = s < 10 ? "0" + s : s;
+  sec.innerHTML = addZero(s);
   day.innerHTML = d;
   wday.innerHTML = daysOfTheWeek[weekDay];
   tarikh.innerHTML = DATE;
@@ -68,6 +71,10 @@ function checkHour(e) {
     e = e - 12;
     return e;
   } else return e;
+}
+function addZero(num){
+  newNum= num <10 ? "0" + num : num;
+  return newNum;
 }
 
 // stop watch ______________________________________
@@ -152,9 +159,9 @@ const timerBox=timerThings.getElementsByClassName('timerBox');
 const timerArrowRapper = document.querySelectorAll(".timerArrowRapper");
 const stopRinging = document.querySelector(".stopRinging");
 let keyDownU,keyDownD;
-
 let check=true
 let remainingTimeInSec,remainings;
+
 timerArrowRapper.forEach((num) => {
 let numInput = num.querySelector(".timerBox");
 let arrup = num.querySelector(".up");
@@ -173,6 +180,7 @@ arrup.addEventListener("mousedown", () => {
       if (numInput.value == numInput.max || numInput.value==Math.floor(numInput.max)/2) {
         clearInterval(keyDownU);
       }
+        numInput.value = addZero(numInput.value);
     }, 100);
   }
 });
@@ -188,12 +196,12 @@ arrdown.addEventListener("mousedown", () => {
   }
   isclicking = true;
   if (isclicking) {
-    // console.log(Math.floor(numInput.max/2))
     keyDownD = setInterval(() => {
       numInput.stepDown();
       if (numInput.value == numInput.min || numInput.value == Math.floor(numInput.max) / 2) {
         clearInterval(keyDownD);
       }
+        numInput.value = addZero(numInput.value);
     }, 100);
   }
   
@@ -279,10 +287,13 @@ timerRing.currentTime=0;
 endTimer();
 })
 
-
-
 const alarmThings = document.querySelector("#alarmPage");
 const alarmArrowRapper = alarmThings.querySelectorAll(".alarmArrowRapper");
+const aHour = alarmThings.querySelector("#alarmHour");
+const aMin = alarmThings.querySelector("#alarmMin");
+const aSec = alarmThings.querySelector("#alarmSec");
+const alarmAmPm = alarmThings.querySelector("#alarmAmPm");
+const alarmSetBtn = alarmThings.querySelector(".alarmSetBtn");
 
 
 alarmArrowRapper.forEach((num) => {
@@ -306,6 +317,7 @@ alarmArrowRapper.forEach((num) => {
         ) {
           clearInterval(keyDownU);
         }
+        numInput.value=addZero(numInput.value);
       }, 100);
     }
   });
@@ -321,7 +333,7 @@ alarmArrowRapper.forEach((num) => {
     }
     isclicking = true;
     if (isclicking) {
-      
+
       keyDownD = setInterval(() => {
         numInput.stepDown();
         if (
@@ -330,6 +342,7 @@ alarmArrowRapper.forEach((num) => {
         ) {
           clearInterval(keyDownD);
         }
+        numInput.value=addZero(numInput.value)
       }, 100);
     }
   });
@@ -340,3 +353,23 @@ alarmArrowRapper.forEach((num) => {
 });
 
 
+alarmSetBtn.addEventListener("click",()=>{
+  let h=parseInt(aHour.value);
+  let m=parseInt(aMin.value);
+let s=parseInt(aSec.value);
+let ampm=parseInt(alarmAmPm.value);
+
+  console.log(aHour.value);
+  console.log(aMin.value);
+  console.log(aSec.value);
+  console.log(alarmAmPm.value);
+})
+function changeAmPm(data) {
+  var currentOptionIndex = alarmAmPm.selectedIndex;
+
+  // Calculate the new index after the change
+  var newOptionIndex =(currentOptionIndex + data + alarmAmPm.options.length) % alarmAmPm.options.length;
+
+  // Update the selected option
+  alarmAmPm.selectedIndex = newOptionIndex;
+}
