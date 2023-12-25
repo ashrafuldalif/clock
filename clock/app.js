@@ -1,8 +1,4 @@
 
-// WhiteanT Part 
-// TODO: ekta function banaya dei ja page ta load kore dibo ar active add kore dibo
-// Add active class to the current button (highlight it)
-
 var btns = document.getElementsByClassName("btn");
 for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", function () {
@@ -155,86 +151,192 @@ const timerBtns=timerThings.querySelectorAll(".timerBtn");
 const timerBox=timerThings.getElementsByClassName('timerBox');
 const timerArrowRapper = document.querySelectorAll(".timerArrowRapper");
 const stopRinging = document.querySelector(".stopRinging");
+let keyDownU,keyDownD;
 
-let check=true;
+let check=true
 let remainingTimeInSec,remainings;
 timerArrowRapper.forEach((num) => {
-  const numInput = num.querySelector(".timerBox");
-  const arrup = num.querySelector(".up");
-  const arrdown = num.querySelector(".down");
-  arrup.addEventListener("click", () => {
-    numInput.stepUp();
-    checkMaxMin();
-  });
-  arrdown.addEventListener("click", () => {
-    numInput.stepDown();
-    checkMaxMin();
-  });
+let numInput = num.querySelector(".timerBox");
+let arrup = num.querySelector(".up");
+let arrdown = num.querySelector(".down");
+
+let isclicking = false;
+arrup.addEventListener("mousedown", () => {
+  if(keyDownD||keyDownU){
+    clearInterval(keyDownD);
+    clearInterval(keyDownU);
+  }
+  isclicking = true;
+  if (isclicking) {
+    keyDownU = setInterval(() => {
+      numInput.stepUp();
+      if (numInput.value == numInput.max || numInput.value==Math.floor(numInput.max)/2) {
+        clearInterval(keyDownU);
+      }
+    }, 100);
+  }
+});
+arrup.addEventListener("mouseup", () => {
+  isclicking = false;
+  clearInterval(keyDownU);
+});
+
+arrdown.addEventListener("mousedown", () => {
+  if(keyDownD||keyDownU){
+    clearInterval(keyDownD);
+    clearInterval(keyDownU);
+  }
+  isclicking = true;
+  if (isclicking) {
+    // console.log(Math.floor(numInput.max/2))
+    keyDownD = setInterval(() => {
+      numInput.stepDown();
+      if (numInput.value == numInput.min || numInput.value == Math.floor(numInput.max) / 2) {
+        clearInterval(keyDownD);
+      }
+    }, 100);
+  }
+  
+});
+arrdown.addEventListener("mouseup", () => {
+  isclicking = false;
+  clearInterval(keyDownD);
+});
 });
 function startTimer(){
-  if(check==true ){
-    check=false;
-  let timerHour=parseInt(tInputHour.value,10);
-  let timerMin=parseInt(tInputMin.value,10);
-  let timerSec=parseInt(tInputsec.value,10);
-  let totalTimeInSec=timerHour*3600+timerMin*60+timerSec;
+    if (keyDownD || keyDownU) {
+      clearInterval(keyDownD);
+      clearInterval(keyDownU);
+    }
+if(check==true ){
+check=false;
+let timerHour=parseInt(tInputHour.value,10);
+let timerMin=parseInt(tInputMin.value,10);
+let timerSec=parseInt(tInputsec.value,10);
+let totalTimeInSec=timerHour*3600+timerMin*60+timerSec;
 
-  if (remainingTimeInSec) {
-    totalTimeInSec = remainingTimeInSec;
-    remainingTimeInSec = undefined; 
-  }
+if (remainingTimeInSec) {
+  totalTimeInSec = remainingTimeInSec;
+  remainingTimeInSec = undefined; 
+}
 countdown = setInterval(function () {
   timerDisplay.classList.remove("hide");
   timer.classList.add("hide");
   const hours = Math.floor(totalTimeInSec / 3600);
   const minutes = Math.floor((totalTimeInSec % 3600) / 60);
   const seconds = totalTimeInSec % 60;
-
-timerDisplay.innerHTML = `${String(hours).padStart(2, "0")} : ${String(minutes).padStart(2, "0")} : ${String(seconds).padStart(2, "0")}`;
-
+  
+  timerDisplay.innerHTML = `${String(hours).padStart(2, "0")} : ${String(minutes).padStart(2, "0")} : ${String(seconds).padStart(2, "0")}`;
+  
   if (totalTimeInSec <= 0) {
     clearInterval(countdown);
     timerDisplay.innerHTML = "Time's up!";
-
-  timesUp();
+    
+    timesUp();
   }
-remainings=totalTimeInSec-1;
+  remainings=totalTimeInSec-1;
   totalTimeInSec--;
 }, 1000);
 }}
 function endTimer() {
-  clearInterval(countdown);
-  tInputHour.value = 0;
-  tInputMin.value = 0;
-  tInputsec.value = 0;
-  timer.classList.remove("hide");
-  timerDisplay.classList.add("hide");
-  check=true;
+    if (keyDownD || keyDownU) {
+      clearInterval(keyDownD);
+      clearInterval(keyDownU);
+    }
+clearInterval(countdown);
+tInputHour.value = 0;
+tInputMin.value = 0;
+tInputsec.value = 0;
+timer.classList.remove("hide");
+timerDisplay.classList.add("hide");
+check=true;
 }
 function pauseTimer(){
-  clearInterval(countdown);
+clearInterval(countdown);
 remainingTimeInSec=remainings;
-  check=true;
+check=true;
 }
 let playTheAudio;
 let timerRing=new Audio("timer_tune.mp3");
 function timesUp(){
-  for(let i=0 ;i<3;i++){
-    timerBtns[i].classList.add("hide");
-  }
-  stopRinging.classList.remove("hide");
-  playTheAudio=setInterval(() => {
-    timerRing.play();
-  }, 10);
+for(let i=0 ;i<3;i++){
+  timerBtns[i].classList.add("hide");
+}
+stopRinging.classList.remove("hide");
+playTheAudio=setInterval(() => {
+  timerRing.play();
+}, 10);
 
 }
 stopRinging.addEventListener("click",e=>{
-  for(let i=0 ;i<3;i++){
-    timerBtns[i].classList.remove("hide");
-  }
-  stopRinging.classList.add("hide");
+for(let i=0 ;i<3;i++){
+  timerBtns[i].classList.remove("hide");
+}
+stopRinging.classList.add("hide");
 timerRing.pause();
-  clearInterval(playTheAudio);
-  timerRing.currentTime=0;
-  endTimer();
+clearInterval(playTheAudio);
+timerRing.currentTime=0;
+endTimer();
 })
+
+
+
+const alarmThings = document.querySelector("#alarmPage");
+const alarmArrowRapper = alarmThings.querySelectorAll(".alarmArrowRapper");
+
+
+alarmArrowRapper.forEach((num) => {
+  let numInput = num.querySelector(".alarmInputBox");
+  let arrup = num.querySelector(".up");
+  let arrdown = num.querySelector(".down");
+
+  let isclicking = false;
+  arrup.addEventListener("mousedown", () => {
+    if (keyDownD || keyDownU) {
+      clearInterval(keyDownD);
+      clearInterval(keyDownU);
+    }
+    isclicking = true;
+    if (isclicking) {
+      keyDownU = setInterval(() => {
+        numInput.stepUp();
+        if (
+          numInput.value == numInput.max ||
+          numInput.value == Math.floor(numInput.max) / 2
+        ) {
+          clearInterval(keyDownU);
+        }
+      }, 100);
+    }
+  });
+  arrup.addEventListener("mouseup", () => {
+    isclicking = false;
+    clearInterval(keyDownU);
+  });
+
+  arrdown.addEventListener("mousedown", () => {
+    if (keyDownD || keyDownU) {
+      clearInterval(keyDownD);
+      clearInterval(keyDownU);
+    }
+    isclicking = true;
+    if (isclicking) {
+      
+      keyDownD = setInterval(() => {
+        numInput.stepDown();
+        if (
+          numInput.value == numInput.min ||
+          numInput.value == Math.floor(numInput.max) / 2
+        ) {
+          clearInterval(keyDownD);
+        }
+      }, 100);
+    }
+  });
+  arrdown.addEventListener("mouseup", () => {
+    isclicking = false;
+    clearInterval(keyDownD);
+  });
+});
+
+

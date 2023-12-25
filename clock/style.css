@@ -67,7 +67,7 @@ nav{
     box-shadow: 0 0 2px 0.1px var(--iconOutLine);
     transition:all 1.5s ease-in-out 0 ;
 }
-.menuIcon:active,.timeIcon:active,.stopWatchIcon:active,.timerIcon:active,.alarmIcon:active,.stpwbtn:active,.timerBtn:active,.up:active,.down:active{
+.menuIcon:active,.timeIcon:active,.stopWatchIcon:active,.timerIcon:active,.alarmIcon:active,.stpwbtn:active,.timerBtn:active,.up:active,.down:active,.alarmSetBtn:active{
 border:none;
     transform: translate(5px,0),scale(40);
     box-shadow: 0 0 1.2vw .1vw var(--clickEffect);
@@ -156,7 +156,7 @@ section{
     scroll-snap-align: start;
     background: linear-gradient(to top, var(--bgcolor1), var(--bgcolor2)); 
 }
-.stpwbtn,.timerBtn{
+.stpwbtn,.timerBtn,.alarmSetBtn{
     height: 60px;
     width: 100px;
     margin: 20px;
@@ -170,13 +170,13 @@ section{
     box-shadow:0 0 8px 0.1px var(--buttonOutLine) ;
     border-bottom:5px solid var(--highlight);
 }
-.timer{
+.timer,.alarmInputs{
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 150px 0 50px 0;
 }
-.timerBox{
+.timerBox,.alarmInputBox{
     height: 120px;
     width: 150px;
     padding: 30px;
@@ -193,11 +193,13 @@ section{
     /* border-radius: 20px; */
     /* border-bottom: 8px solid var(--highlight); */
 }
+.alarmInputBox::-webkit-inner-spin-button,
+.alarmInputBox::-webkit-outer-spin-button,
 .timerBox::-webkit-inner-spin-button,
 .timerBox::-webkit-outer-spin-button{
     -webkit-appearance: none;
 }
-.timerBtns{
+.timerBtns,.alarmBtns{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -207,7 +209,7 @@ section{
 }
 
 
-.timerArrowRapper{
+.timerArrowRapper,.alarmArrowRapper{
     height: 210px;
     display:flex;
     flex-direction:column ;
