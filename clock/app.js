@@ -158,6 +158,7 @@ const timerBtns=timerThings.querySelectorAll(".timerBtn");
 const timerBox=timerThings.getElementsByClassName('timerBox');
 const timerArrowRapper = document.querySelectorAll(".timerArrowRapper");
 const stopRinging = document.querySelector(".stopRinging");
+
 let keyDownU,keyDownD;
 let check=true
 let remainingTimeInSec,remainings;
@@ -177,8 +178,10 @@ arrup.addEventListener("mousedown", () => {
   if (isclicking) {
     keyDownU = setInterval(() => {
       numInput.stepUp();
-      if (numInput.value == numInput.max || numInput.value==Math.floor(numInput.max)/2) {
+      if (numInput.value == numInput.max ) {
         clearInterval(keyDownU);
+          numInput.value = numInput.min;
+
       }
         numInput.value = addZero(numInput.value);
     }, 100);
@@ -198,8 +201,10 @@ arrdown.addEventListener("mousedown", () => {
   if (isclicking) {
     keyDownD = setInterval(() => {
       numInput.stepDown();
-      if (numInput.value == numInput.min || numInput.value == Math.floor(numInput.max) / 2) {
+      if (numInput.value == numInput.min) {
         clearInterval(keyDownD);
+          numInput.value = numInput.max;
+
       }
         numInput.value = addZero(numInput.value);
     }, 100);
@@ -294,8 +299,10 @@ const aMin = alarmThings.querySelector("#alarmMin");
 const aSec = alarmThings.querySelector("#alarmSec");
 const alarmAmPm = alarmThings.querySelector("#alarmAmPm");
 const alarmSetBtn = alarmThings.querySelector(".alarmSetBtn");
-
-
+const alarmWeekBtns = alarmThings.querySelectorAll(".AweekBox");
+const sayTheDays = alarmThings.querySelector(".sayTheDays");
+const everyDay = alarmThings.querySelector(".everyDay");
+console.log(everyDay);
 alarmArrowRapper.forEach((num) => {
   let numInput = num.querySelector(".alarmInputBox");
   let arrup = num.querySelector(".up");
@@ -303,19 +310,20 @@ alarmArrowRapper.forEach((num) => {
 
   let isclicking = false;
   arrup.addEventListener("mousedown", () => {
+    isclicking = true;
     if (keyDownD || keyDownU) {
       clearInterval(keyDownD);
       clearInterval(keyDownU);
     }
-    isclicking = true;
-    if (isclicking) {
+  
+
+      if (isclicking) {
       keyDownU = setInterval(() => {
         numInput.stepUp();
         if (
-          numInput.value == numInput.max ||
-          numInput.value == Math.floor(numInput.max) / 2
-        ) {
+          numInput.value == numInput.max) {
           clearInterval(keyDownU);
+          numInput.value=numInput.min;
         }
         numInput.value=addZero(numInput.value);
       }, 100);
@@ -327,20 +335,19 @@ alarmArrowRapper.forEach((num) => {
   });
 
   arrdown.addEventListener("mousedown", () => {
+    isclicking = true;
     if (keyDownD || keyDownU) {
       clearInterval(keyDownD);
       clearInterval(keyDownU);
     }
-    isclicking = true;
     if (isclicking) {
 
       keyDownD = setInterval(() => {
         numInput.stepDown();
-        if (
-          numInput.value == numInput.min ||
-          numInput.value == Math.floor(numInput.max) / 2
-        ) {
-          clearInterval(keyDownD);
+        if (numInput.value == numInput.min) {
+          clearInterval(keyDownD);  
+          numInput.value=numInput.max;
+
         }
         numInput.value=addZero(numInput.value)
       }, 100);
@@ -356,14 +363,13 @@ alarmArrowRapper.forEach((num) => {
 alarmSetBtn.addEventListener("click",()=>{
   let h=parseInt(aHour.value);
   let m=parseInt(aMin.value);
-let s=parseInt(aSec.value);
-let ampm=parseInt(alarmAmPm.value);
+  let s=parseInt(aSec.value);
+  let ampm=parseInt(alarmAmPm.value);
 
-  console.log(aHour.value);
-  console.log(aMin.value);
-  console.log(aSec.value);
-  console.log(alarmAmPm.value);
+  console.log(`${h} : ${m} : ${s} : ${ampm} `);
 })
+
+
 function changeAmPm(data) {
   var currentOptionIndex = alarmAmPm.selectedIndex;
 
@@ -373,3 +379,98 @@ function changeAmPm(data) {
   // Update the selected option
   alarmAmPm.selectedIndex = newOptionIndex;
 }
+
+let checkingWeekDays = [ false, false, false, false, false, false, false];
+
+for (let i = 0; i < 7; i++) {
+  alarmWeekBtns[i].addEventListener("click", (e) => {
+    show='';
+    if (!checkingWeekDays[i]) {
+      checkingWeekDays[i] = true;
+      e.target.classList.add("selected");
+    } else {
+      checkingWeekDays[i] = false;
+      e.target.classList.remove("selected");
+    }
+    sureTheDays(checkingWeekDays);
+  });
+}
+
+
+
+let tempForeveryDay=false;
+everyDay.addEventListener("click",e=>{
+  console.log("clicked");
+  if(!tempForeveryDay){
+    console.log("if");
+    checkingWeekDays = [true, true, true, true, true, true, true];
+    tempForeveryDay = true;
+    e.target.classList.add("selected")
+    selectingByAllKey(true)
+    
+  }
+  else{
+    console.log("else");
+    checkingWeekDays = [false, false, false, false, false, false, false];
+    tempForeveryDay = false;
+    e.target.classList.remove("selected")
+    selectingByAllKey(false);
+  }
+  sureTheDays(checkingWeekDays);
+
+})
+function selectingByAllKey(bool){
+  if(bool){
+    for (i=0;i<7;i++){
+      alarmWeekBtns[i].classList.add("selected");
+    }
+  }
+  else {
+      for (i=0;i<7;i++){
+    alarmWeekBtns[i].classList.remove("selected");
+  }}
+}
+
+
+
+
+
+
+
+
+
+
+let days =new Set (),temp=[],x=0;
+function sureTheDays(e){
+for(i=0;i<7;i++){
+  if(e[i]){
+    temp[x]=daysOfTheWeek[i];
+    days.add(temp[x]);
+  }
+  else{
+    days.delete(daysOfTheWeek[i]);
+  }
+}
+howManyDay([...days]);
+}
+function howManyDay(sure){
+  console.log(sure.length)
+if(sure.length>=7)
+{sure="Every Day";
+everyDay.classList.add("selected");
+tempForeveryDay=true;
+}
+else if (sure.length==0){
+  sure="Single Day";
+}
+else{
+  everyDay.classList.remove("selected");
+  tempForeveryDay=false;
+
+}
+sayTheDays.innerHTML=sure;
+}
+
+
+
+
