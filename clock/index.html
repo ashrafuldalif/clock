@@ -158,9 +158,9 @@
 </div>
 <div class="timerDisplay hide"> 00 : 00 : 00 </div>
 <div class="timerBtns" id="timerBtns">
-    <button class="timerBtn" onclick="endTimer()" id="timerReset">reset</button>
-    <button class="timerBtn" onclick="startTimer()" id="submitBtn"> start</button>
     <button class="timerBtn" onclick="pauseTimer()" id="pauseBtn"> pause</button>
+    <button class="timerBtn" onclick="startTimer()" id="submitBtn"> start</button>
+    <button class="timerBtn" onclick="endTimer()" id="timerReset">reset</button>
     <button class="stopRinging hide" onclick=""> Stop Ringing</button>
     
 </div>
@@ -217,8 +217,8 @@
 <!-- vai ei jaygay somossa  -->
 <!-- <input type="number" class="alarmInputBox" id="alarmAmPm" min="0" max="2"  value="AM"> -->
 <select name="ampm" class="alarmInputBox " id="alarmAmPm">
-        <option value=0 class="hide" >AM</option>
-    <option value=1 class="hide">PM</option>
+        <option value=1 class="hide" >AM</option>
+    <option value=2 class="hide">PM</option>
 </select>
 <div class="down" onclick="changeAmPm(-1)">        
     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none">
@@ -239,7 +239,11 @@
     <button class="AweekBox"  value=6 > S </button>
 </div>
 <div class="alarmBtns">
+    
+    <button class="snooze">Snooze</button>
     <button class="alarmSetBtn">Set</button>
+    <input type="file" class="setTune" id="setTune" accept="audio/*" placeholder="Tune">
+    <label for="setTune">Add Tune </label>
 </div>
 <div class="allAlarms">
 

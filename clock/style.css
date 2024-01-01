@@ -160,7 +160,7 @@ section{
     scroll-snap-align: start;
     background: linear-gradient(to top, var(--bgcolor1), var(--bgcolor2)); 
 }
-.stpwbtn,.timerBtn,.alarmSetBtn{
+.stpwbtn,.timerBtn,.alarmSetBtn,label,.snooze{
     height: 60px;
     width: 100px;
     margin: 20px;
@@ -283,15 +283,13 @@ section{
     text-indent: 1px;
     text-overflow: '';
     border: 0;
-    
 }
 
 #alarmAmPm::-ms-expand {
     display: none;
 }
-#alarmAmPm option{
-    display: none;
-}
+
+
 .AweekBox,.everyDay{
     height: 50px;
     width: 40px;
@@ -323,4 +321,12 @@ section{
 .everyDay{
     width: 110px;
 }
-
+input[type="file"]{
+    display: none;
+}
+label{
+    text-align: center;
+    padding-top: 11px;
+    width: 130px;
+    font-size: 24px;
+}

@@ -39,6 +39,8 @@ const daysOfTheWeek = [
   "Friday",
   "Saturday",
 ];
+
+let correctTime;
 const whatIsTheTimeNow = () => {
   let today = new Date();
   let h = today.getHours();
@@ -53,16 +55,16 @@ const whatIsTheTimeNow = () => {
   let year = today.getFullYear();
   DATE = addZero(month) + " : " + year;
   DATE = addZero(date) + " : " + DATE;
-  // hour.innerHTML = h < 10 ? "0" + h : h;
   hour.innerHTML = addZero(h);
-  // min.innerHTML = m < 10 ? "0" + m : m;
   min.innerHTML = addZero(m);
-  // sec.innerHTML = s < 10 ? "0" + s : s;
   sec.innerHTML = addZero(s);
   day.innerHTML = d;
-  wday.innerHTML = daysOfTheWeek[weekDay];
   tarikh.innerHTML = DATE;
+  wday.innerHTML = daysOfTheWeek[weekDay];
+  correctTime=`${h} : ${m} : ${s} : ${d}`;
+
 };
+
 whatIsTheTimeNow();
 setInterval(whatIsTheTimeNow, 1000);
 
@@ -70,7 +72,10 @@ function checkHour(e) {
   if (e > 12) {
     e = e - 12;
     return e;
-  } else return e;
+  }if(e==0){
+    return 12;
+  }
+  else return e;
 }
 function addZero(num){
   newNum= num <10 ? "0" + num : num;
@@ -302,7 +307,8 @@ const alarmSetBtn = alarmThings.querySelector(".alarmSetBtn");
 const alarmWeekBtns = alarmThings.querySelectorAll(".AweekBox");
 const sayTheDays = alarmThings.querySelector(".sayTheDays");
 const everyDay = alarmThings.querySelector(".everyDay");
-console.log(everyDay);
+const tune=alarmThings.querySelector("#setTune");
+
 alarmArrowRapper.forEach((num) => {
   let numInput = num.querySelector(".alarmInputBox");
   let arrup = num.querySelector(".up");
@@ -359,15 +365,32 @@ alarmArrowRapper.forEach((num) => {
   });
 });
 
+function allAlarmInfo(H,M,S,amOrPm,AweekDays,audio) {
+  this.H=parseInt(H.value);
+  this.M=parseInt(M.value);
+  this.S=parseInt(S.value);
+  this.amOrPm=amOrPm.value ==1 ? "AM" :"PM";
+  this.AweekDays=AweekDays;
+  this.audio=audio;
+  this.theTime = `${this.H} : ${this.M} : ${this.S} : ${this.amOrPm}`;
+  this.TheAlarm = function checkTheAlarm(correctTime , thisalarmTime=this.theTime) {
+    if (alarmTime==correctTime){
+      console.log(' hoice re vai hoice');
+    }
+  };
+}
 
+
+
+
+let alarmCount=0,alarmNo=[];
 alarmSetBtn.addEventListener("click",()=>{
-  let h=parseInt(aHour.value);
-  let m=parseInt(aMin.value);
-  let s=parseInt(aSec.value);
-  let ampm=parseInt(alarmAmPm.value);
-
-  console.log(`${h} : ${m} : ${s} : ${ampm} `);
+  alarmNo[alarmCount]=new allAlarmInfo(aHour,aMin,aSec,alarmAmPm,[...days]);
+  console.log(alarmNo[alarmCount]);
+  alarmCount++;
 })
+
+
 
 
 function changeAmPm(data) {
@@ -400,9 +423,8 @@ for (let i = 0; i < 7; i++) {
 
 let tempForeveryDay=false;
 everyDay.addEventListener("click",e=>{
-  console.log("clicked");
   if(!tempForeveryDay){
-    console.log("if");
+
     checkingWeekDays = [true, true, true, true, true, true, true];
     tempForeveryDay = true;
     e.target.classList.add("selected")
@@ -410,7 +432,6 @@ everyDay.addEventListener("click",e=>{
     
   }
   else{
-    console.log("else");
     checkingWeekDays = [false, false, false, false, false, false, false];
     tempForeveryDay = false;
     e.target.classList.remove("selected")
@@ -432,14 +453,6 @@ function selectingByAllKey(bool){
 }
 
 
-
-
-
-
-
-
-
-
 let days =new Set (),temp=[],x=0;
 function sureTheDays(e){
 for(i=0;i<7;i++){
@@ -454,7 +467,7 @@ for(i=0;i<7;i++){
 howManyDay([...days]);
 }
 function howManyDay(sure){
-  console.log(sure.length)
+
 if(sure.length>=7)
 {sure="Every Day";
 everyDay.classList.add("selected");
@@ -470,7 +483,6 @@ else{
 }
 sayTheDays.innerHTML=sure;
 }
-
 
 
 
