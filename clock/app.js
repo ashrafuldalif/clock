@@ -61,8 +61,14 @@ const whatIsTheTimeNow = () => {
   day.innerHTML = d;
   tarikh.innerHTML = DATE;
   wday.innerHTML = daysOfTheWeek[weekDay];
-  correctTime=`${h} : ${m} : ${s} : ${d}`;
 
+  correctTime=`${h} : ${m} : ${s} ${d}`;
+  try {
+    for (i = 0; i < alarmNo.length; i++) {
+      alarmNo[i].TheAlarm(correctTime, i, daysOfTheWeek[weekDay]);  }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 whatIsTheTimeNow();
@@ -296,7 +302,7 @@ clearInterval(playTheAudio);
 timerRing.currentTime=0;
 endTimer();
 })
-
+// alarm part ______________________________________________________
 const alarmThings = document.querySelector("#alarmPage");
 const alarmArrowRapper = alarmThings.querySelectorAll(".alarmArrowRapper");
 const aHour = alarmThings.querySelector("#alarmHour");
@@ -308,7 +314,14 @@ const alarmWeekBtns = alarmThings.querySelectorAll(".AweekBox");
 const sayTheDays = alarmThings.querySelector(".sayTheDays");
 const everyDay = alarmThings.querySelector(".everyDay");
 const tune=alarmThings.querySelector("#setTune");
+const alarmName = alarmThings.querySelector("#alarmName");
+const storingAllAlarms = alarmThings.querySelector(".allAlarms");
+const delArea=alarmThings.querySelectorAll(".del");
 
+const wholeAlarm = alarmThings.querySelector(".justForhiding");
+const timesUpAlarm = alarmThings.querySelector(".alarmTimeUp");
+const stopAlarm = alarmThings.querySelector(".stopRingingAlarm");
+const customName = alarmThings.querySelector(".customName");
 alarmArrowRapper.forEach((num) => {
   let numInput = num.querySelector(".alarmInputBox");
   let arrup = num.querySelector(".up");
@@ -364,125 +377,291 @@ alarmArrowRapper.forEach((num) => {
     clearInterval(keyDownD);
   });
 });
-
-function allAlarmInfo(H,M,S,amOrPm,AweekDays,audio) {
+var thisOne;
+function allAlarmInfo(H,M,S,amOrPm,name,tuneName,check,AweekDays,audio) {
   this.H=parseInt(H.value);
   this.M=parseInt(M.value);
   this.S=parseInt(S.value);
   this.amOrPm=amOrPm.value ==1 ? "AM" :"PM";
+  this.name=name==NaN?`Alarm No ${alarmCount+1}`:name==''?`Alarm No ${alarmCount+1}`:name;
+  this.tuneName=tuneName;
+  this.check=check;
   this.AweekDays=AweekDays;
-  this.audio=audio;
-  this.theTime = `${this.H} : ${this.M} : ${this.S} : ${this.amOrPm}`;
-  this.TheAlarm = function checkTheAlarm(correctTime , thisalarmTime=this.theTime) {
-    if (alarmTime==correctTime){
-      console.log(' hoice re vai hoice');
+  this.audio=new Audio (audio);
+  this.theTime = `${this.H} : ${this.M} : ${this.S} ${this.amOrPm}`;
+  this.TheAlarm =(correctTime,whichOne,checkWeek)=> {
+    if(this.AweekDays.includes(checkWeek)||this.AweekDays.length==0){
+      if (this.theTime==correctTime && this.check==true){
+        thisOne=whichOne;
+        this.audio.loop=true;
+        this.audio.play();
+        wholeAlarm.classList.add("hide");
+        timesUpAlarm.classList.remove("hide");
+        stopAlarm.classList.remove("hide");
+        customName.innerHTML=this.name;
+        this.check=false;
+        if(this.AweekDays.length==0){
+          document.querySelector(`#alarm${thisOne}`).querySelector(".yesOrNo").checked=false;
+        }
+      }
     }
   };
 }
-
-
-
-
-let alarmCount=0,alarmNo=[];
-alarmSetBtn.addEventListener("click",()=>{
-  alarmNo[alarmCount]=new allAlarmInfo(aHour,aMin,aSec,alarmAmPm,[...days]);
-  console.log(alarmNo[alarmCount]);
-  alarmCount++;
+stopAlarm.addEventListener("click",()=>{
+  alarmNo[thisOne].audio.pause();
+  alarmNo[thisOne].audio.currentTime=0;
+  timesUpAlarm.classList.add("hide");
+  stopAlarm.classList.add("hide");
+  wholeAlarm.classList.remove("hide");
 })
+let selectedTune,tuneName;
+let alarmNo=[];
+let alarmCount=alarmNo.length;
+tune.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    tuneName=file.name;
+    selectedTune = URL.createObjectURL(file);
+    console.log(selectedTune);
+  }
+});
 
+// When setting the alarm
+alarmSetBtn.addEventListener("click", () => {
+  alarmNo[alarmCount] = new allAlarmInfo(
+    aHour,
+    aMin,
+    aSec,
+    alarmAmPm,
+    alarmName.value,
+    tuneName,
+    true,
+    [...days],
+    selectedTune 
+  );
+    justDisplaytheAlarms();
+    alarmCount++;
 
+  });
+  function justDisplaytheAlarms(){
+    let storingAs = document.createElement("div");
+    storingAs.className = "storingTheAlarms";
+    storingAs.setAttribute("Draggable",true);
+    storingAs.setAttribute('id',`alarm${alarmCount}`);
+    let nameDiv=document.createElement("div");
+    nameDiv.className="nameDiv";
+    let img=document.createElement("img");
+    img.src="cross.png";
+    img.className="closeBtn";
+    let adiv = document.createElement("div");
+    let name = document.createElement("p");
+    name.className = "theNameOfAlarm";
+    name.textContent = alarmNo[alarmCount].name;
+    let mainThings = document.createElement("div");
+    mainThings.className = "mainTextsOfAlarm";
+    let thealarmTime = document.createElement("p");
+    thealarmTime.className = "theAlarmTime";
+    thealarmTime.textContent = alarmNo[alarmCount].theTime;
+    let storingDays = document.createElement("p");
+    storingDays.className = "days";
+    storingDays.textContent = displayingWeeks(alarmNo[alarmCount].AweekDays);
+    let inputTag = document.createElement("input");
+    inputTag.className = "yesOrNo";
+    inputTag.setAttribute("checked",true);
+    inputTag.setAttribute("type", "checkbox");
+    inputTag.addEventListener("change",selectedAlarm);
+    adiv.className="rapperOfImg"
+    let others = document.createElement("div");
+    others.className = "other";
+    let PTag = document.createElement("p");
+    PTag.textContent = alarmNo[alarmCount].tuneName;
+    adiv.appendChild(img);
+    nameDiv.appendChild(name); 
+    nameDiv.appendChild(adiv); 
+    storingAs.appendChild(nameDiv);
+    mainThings.appendChild(thealarmTime);
+    mainThings.appendChild(storingDays);
+    mainThings.appendChild(inputTag);
+    storingAs.appendChild(mainThings);
+    others.appendChild(PTag);
+    storingAs.appendChild(others);
+    storingAs.addEventListener("dragstart",drag)
+    adiv.addEventListener("click", notThisAlarm);
+    storingAllAlarms.appendChild(storingAs);
+  }
 
-
-function changeAmPm(data) {
-  var currentOptionIndex = alarmAmPm.selectedIndex;
-
-  // Calculate the new index after the change
-  var newOptionIndex =(currentOptionIndex + data + alarmAmPm.options.length) % alarmAmPm.options.length;
-
-  // Update the selected option
-  alarmAmPm.selectedIndex = newOptionIndex;
+function selectedAlarm(e){
+  let id=(e.target.parentElement.parentElement.id);
+  let num=parseInt(id.substring(5));
+if(e.target.checked){
+  alarmNo[num].check=true;
+}else {
+  alarmNo[num].check=false;
+}
 }
 
-let checkingWeekDays = [ false, false, false, false, false, false, false];
-
-for (let i = 0; i < 7; i++) {
-  alarmWeekBtns[i].addEventListener("click", (e) => {
-    show='';
-    if (!checkingWeekDays[i]) {
-      checkingWeekDays[i] = true;
-      e.target.classList.add("selected");
-    } else {
-      checkingWeekDays[i] = false;
-      e.target.classList.remove("selected");
+function notThisAlarm(e){
+  e.target.parentElement.parentElement.parentElement.remove();
+  let index=parseInt(e.target.parentElement.parentElement.parentElement.id.substring(5));
+  let afterDel=document.querySelectorAll(".storingTheAlarms");
+  console.log(index);
+  alarmNo.splice(index,1);
+  // for(i=0;i<alarmNo.length;i++){
+  //   console.log(afterDel[i])
+  //   if(i>=index){
+  //     console.log("yes");
+  //   }
+  //   alarmCount=i;
+  //   removeAllDesplaying();
+  //   justDisplaytheAlarms();
+  // }
+}
+  function removeAllDesplaying(){
+    for(i=0;i<alarmNo.length;i++){
+      document.getElementById(`alarm${i}`).remove;
+    }
+  }
+  function drag(ev){
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+  function allowDrop(ev) {
+    ev.preventDefault();
+  }
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var theElement = document.getElementById(data);
+    if (theElement.classList.contains("storingTheAlarms")) {
+      theElement.parentElement.removeChild(theElement);
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  function displayingWeeks(theWeek){
+    let newWeek='';
+    if(theWeek.length==0){
+      return "Single Day";
+    }
+    else if(theWeek.length<4){
+      return theWeek;
+    }else if (theWeek.length==7){
+      return "Every Day";
+    }
+    else {
+      return `${theWeek.slice(0, 3)} ${theWeek.slice(3, theWeek.length)}`;
+    }
+  }
+  
+  function changeAmPm(data) {
+    var currentOptionIndex = alarmAmPm.selectedIndex;
+    
+    // Calculate the new index after the change
+    var newOptionIndex =(currentOptionIndex + data + alarmAmPm.options.length) % alarmAmPm.options.length;
+    
+    // Update the selected option
+    alarmAmPm.selectedIndex = newOptionIndex;
+  }
+  
+  let checkingWeekDays = [ false, false, false, false, false, false, false];
+  
+  for (let i = 0; i < 7; i++) {
+    alarmWeekBtns[i].addEventListener("click", (e) => {
+      show='';
+      if (!checkingWeekDays[i]) {
+        checkingWeekDays[i] = true;
+        e.target.classList.add("selected");
+      } else {
+        checkingWeekDays[i] = false;
+        e.target.classList.remove("selected");
+      }
+      sureTheDays(checkingWeekDays);
+    });
+  }
+  
+  let tempForeveryDay=false;
+  everyDay.addEventListener("click",e=>{
+    if(!tempForeveryDay){
+      
+      checkingWeekDays = [true, true, true, true, true, true, true];
+      tempForeveryDay = true;
+      e.target.classList.add("selected")
+      selectingByAllKey(true)
+      
+    }
+    else{
+      checkingWeekDays = [false, false, false, false, false, false, false];
+      tempForeveryDay = false;
+      e.target.classList.remove("selected")
+      selectingByAllKey(false);
     }
     sureTheDays(checkingWeekDays);
-  });
-}
-
-
-
-let tempForeveryDay=false;
-everyDay.addEventListener("click",e=>{
-  if(!tempForeveryDay){
-
-    checkingWeekDays = [true, true, true, true, true, true, true];
-    tempForeveryDay = true;
-    e.target.classList.add("selected")
-    selectingByAllKey(true)
     
-  }
-  else{
-    checkingWeekDays = [false, false, false, false, false, false, false];
-    tempForeveryDay = false;
-    e.target.classList.remove("selected")
-    selectingByAllKey(false);
-  }
-  sureTheDays(checkingWeekDays);
-
-})
-function selectingByAllKey(bool){
-  if(bool){
-    for (i=0;i<7;i++){
-      alarmWeekBtns[i].classList.add("selected");
-    }
-  }
-  else {
+  })
+  function selectingByAllKey(bool){
+    if(bool){
       for (i=0;i<7;i++){
-    alarmWeekBtns[i].classList.remove("selected");
-  }}
-}
-
-
-let days =new Set (),temp=[],x=0;
-function sureTheDays(e){
-for(i=0;i<7;i++){
-  if(e[i]){
-    temp[x]=daysOfTheWeek[i];
-    days.add(temp[x]);
+        alarmWeekBtns[i].classList.add("selected");
+      }
+    }
+    else {
+      for (i=0;i<7;i++){
+        alarmWeekBtns[i].classList.remove("selected");
+      }}
+    }
+    
+    let days =new Set (),temp=[],x=0;
+    function sureTheDays(e){
+      for(i=0;i<7;i++){
+        if(e[i]){
+          temp[x]=daysOfTheWeek[i];
+          days.add(temp[x]);
+        }
+        else{
+          days.delete(daysOfTheWeek[i]);
+        }
+      }
+      howManyDay([...days]);
+    }
+    function howManyDay(sure){
+      
+      if(sure.length>=7)
+      {sure="Every Day";
+      everyDay.classList.add("selected");
+      tempForeveryDay=true;
+    }
+    else if (sure.length==0){
+      sure="Single Day";
+    }
+    else{
+      everyDay.classList.remove("selected");
+      tempForeveryDay=false;
+      
+    }
+    sayTheDays.innerHTML=sure;
   }
-  else{
-    days.delete(daysOfTheWeek[i]);
-  }
-}
-howManyDay([...days]);
-}
-function howManyDay(sure){
-
-if(sure.length>=7)
-{sure="Every Day";
-everyDay.classList.add("selected");
-tempForeveryDay=true;
-}
-else if (sure.length==0){
-  sure="Single Day";
-}
-else{
-  everyDay.classList.remove("selected");
-  tempForeveryDay=false;
-
-}
-sayTheDays.innerHTML=sure;
-}
-
-
-
+  
