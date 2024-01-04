@@ -446,7 +446,6 @@ alarmSetBtn.addEventListener("click", () => {
   function justDisplaytheAlarms(){
     let storingAs = document.createElement("div");
     storingAs.className = "storingTheAlarms";
-    storingAs.setAttribute("Draggable",true);
     storingAs.setAttribute('id',`alarm${alarmCount}`);
     let nameDiv=document.createElement("div");
     nameDiv.className="nameDiv";
@@ -485,7 +484,6 @@ alarmSetBtn.addEventListener("click", () => {
     storingAs.appendChild(mainThings);
     others.appendChild(PTag);
     storingAs.appendChild(others);
-    storingAs.addEventListener("dragstart",drag)
     adiv.addEventListener("click", notThisAlarm);
     storingAllAlarms.appendChild(storingAs);
   }
@@ -506,40 +504,28 @@ function notThisAlarm(e){
   let afterDel=document.querySelectorAll(".storingTheAlarms");
   console.log(index);
   alarmNo.splice(index,1);
-  // for(i=0;i<alarmNo.length;i++){
-  //   console.log(afterDel[i])
-  //   if(i>=index){
-  //     console.log("yes");
-  //   }
-  //   alarmCount=i;
-  //   removeAllDesplaying();
-  //   justDisplaytheAlarms();
-  // }
+  removeAllDesplaying();
+  for(i=0;i<alarmNo.length;i++){
+    if(i>=index){
+      afterDel[i].id=`alarm${i-1}`;
+    }
+    alarmCount=i;
+    justDisplaytheAlarms();
+  }
 }
   function removeAllDesplaying(){
-    for(i=0;i<alarmNo.length;i++){
-      document.getElementById(`alarm${i}`).remove;
+    for(i=0;i<=alarmNo.length;i++){
+      let temp=document.getElementById(`alarm${i}`);
+      if (temp){
+        temp.remove();
+      }
     }
   }
-  function drag(ev){
-    ev.dataTransfer.setData("text", ev.target.id);
+  function allDelBtn(){
+    removeAllDesplaying();
+    alarmNo.splice(0,alarmNo.length);
+
   }
-  function allowDrop(ev) {
-    ev.preventDefault();
-  }
-  function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    var theElement = document.getElementById(data);
-    if (theElement.classList.contains("storingTheAlarms")) {
-      theElement.parentElement.removeChild(theElement);
-    }
-  }
-  
-  
-  
-  
-  
   
   
   
