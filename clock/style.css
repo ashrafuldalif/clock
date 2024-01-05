@@ -87,7 +87,7 @@ nav{
     justify-content: center;
     align-items: center;
     border-radius: 20%;
-    margin: 0 1vw 0 1vw ;
+    margin: 1.5vw ;
     flex-shrink: 0;
     background-color: var(--iconBackground);
     border-bottom: 5px solid var(--highlight);
@@ -97,17 +97,16 @@ nav{
 .menuIcon:active,.timeIcon:active,.stopWatchIcon:active,.timerIcon:active,.alarmIcon:active,.stpwbtn:active,.timerBtn:active,.up:active,.down:active,.alarmSetBtn:active,.stopRingingAlarm:active{
 border:none;
     transform: translate(5px,0),scale(40);
-    box-shadow: 0 0 1.2vw .1vw var(--clickEffect);
+    box-shadow: 0 0 10px 1px var(--clickEffect);
 }
 .active{
     border:none;
     transform: translate(5px,0),scale(40);
-    box-shadow: 0 0 1.2vw .1vw var(--clickEffect);
+    box-shadow: 0 0 10px 1px var(--clickEffect);
 }
 .page1,.page2,.page3,.page4,.page5{
 
     /* Whiteant_delete_Something */
-
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -204,7 +203,11 @@ section{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 150px 0 50px 0;
+    margin: 100px 0 50px 0;
+}
+.alarmInputs{
+    margin: 0px 0 50px 0;
+
 }
 .timerBox,.alarmInputBox{
     height: 120px;
@@ -220,8 +223,6 @@ section{
     border: none;
     z-index: 1;
     box-shadow: 0 0 10px 2px var(--clockoutline);
-    /* border-radius: 20px; */
-    /* border-bottom: 8px solid var(--highlight); */
 }
 .alarmInputBox::-webkit-inner-spin-button,
 .alarmInputBox::-webkit-outer-spin-button,
@@ -236,11 +237,11 @@ section{
 }
 .arrow{
     stroke:var(--arrowColor);
+
 }
 
 
 .timerArrowRapper,.alarmArrowRapper{
-    height: 210px;
     display:flex;
     flex-direction:column ;
     justify-content: flex-end;
@@ -248,6 +249,7 @@ section{
 }
 .up,.down{
     background-color: var(--timerBtnBg);
+
     width: 150px;
     display: flex;
     justify-content: center;
@@ -257,10 +259,12 @@ section{
 .up{
     border-top-right-radius:25px ;
     border-top-left-radius:25px ;
+margin: 10px 5px 0 5px;
 }
 .down{
     border-bottom-right-radius:25px ;
     border-bottom-left-radius:25px ;
+    margin: 0 5px 10px 5px;
     border-bottom: 8px solid var(--highlight);
 }
 .timerDisplay,.alarmTimeUp{
