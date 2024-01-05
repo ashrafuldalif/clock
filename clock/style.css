@@ -203,12 +203,9 @@ section{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 100px 0 50px 0;
+    margin: 80px 0 50px 0;
 }
-.alarmInputs{
-    margin: 0px 0 50px 0;
 
-}
 .timerBox,.alarmInputBox{
     height: 120px;
     width: 150px;
@@ -303,17 +300,19 @@ margin: 10px 5px 0 5px;
 #TMRhour{
     padding: 30px 10px;
 }
-.alarmInputs{
-    margin-top: 100px;
-    margin-bottom: 0;
-}
+
 .alarmInputBox{
     margin: 0;
 }
-.alarmArrowRapper{
+.alarmInputs{
+    margin-top: 30px;
+    margin-bottom: 0;
     margin-bottom: 0;
     padding: 0;
     transform: scale(0.7);
+}
+.alarmArrowRapper{
+    margin: 0 15px 0 15px;
 }
 #alarmAmPm {
     font-size:3.5rem;
